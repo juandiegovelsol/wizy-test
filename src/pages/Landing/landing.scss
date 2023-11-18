@@ -26,4 +26,8 @@
     margin-top: 0;
     margin-bottom: 64px;
   }
+  &__inputs {
+    width: 100%;
+    @include flexbox(flex, row, space-between, center);
+  }
 }

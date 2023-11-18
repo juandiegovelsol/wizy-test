@@ -6,6 +6,7 @@
   width: 100vw;
   @include flexbox(flex, row, center, center);
   font-family: $general-font;
+  letter-spacing: 1px;
 }
 /* #root {
   max-width: 1280px;
