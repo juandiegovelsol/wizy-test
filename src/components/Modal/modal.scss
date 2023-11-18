@@ -1,0 +1,23 @@
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  min-height: 100vh;
+  width: 100vw;
+  @include flexbox(flex, row, center, center);
+  &__container {
+    width: 80%;
+    max-width: 1024;
+    height: 90vh;
+    max-height: 848;
+    border: none;
+    border-radius: 32px;
+    box-shadow: 0px 4px 20px 0px rgba(57, 58, 137, 1);
+    background-color: $backgroundColor;
+    @include flexbox(flex, row, center, center);
+  }
+}
