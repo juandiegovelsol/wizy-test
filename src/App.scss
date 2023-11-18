@@ -1,4 +1,13 @@
-#root {
+@import "./styles/mixin.scss";
+@import "./styles/variables.scss";
+
+.app {
+  height: 100vh;
+  width: 100vw;
+  @include flexbox(flex, row, center, center);
+  font-family: $general-font;
+}
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +48,4 @@
 
 .read-the-docs {
   color: #888;
-}
+} */
