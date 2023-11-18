@@ -1,8 +1,29 @@
-/* import { useState } from "react"; */
+import { useState, useEffect } from "react";
+//import { Dispatch, SetStateAction } from "react";
 import { CustomButton } from "../../components/CustomButton";
+import { TypeSelector } from "../../components/TypeSelector";
 import "./landing.scss";
+
 const Landing = () => {
-  const handleClick = () => {};
+  const [option, setOption] = useState("");
+  const [modal, setModal] = useState(false);
+
+  const handleClick = (
+    modal: boolean,
+    setModal: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    console.log("setting state!!", modal);
+    if (modal) {
+      setModal(false);
+    } else {
+      setModal(true);
+    }
+  };
+
+  useEffect(() => {
+    console.log("option", option);
+  }, [option]);
+
   return (
     <main className="landing">
       <section className="landing__container">
@@ -11,14 +32,17 @@ const Landing = () => {
           Select which type of information do you want to add to our system
         </p>
         <article className="landing__inputs">
-          <CustomButton
-            text="Continue"
-            handleClick={handleClick}
-            buttonSize="large"
+          <TypeSelector
+            options={[
+              "I want to add a topic",
+              "I want to add tags",
+              "I want to add products info",
+            ]}
+            setValue={setOption}
           />
           <CustomButton
             text="Continue"
-            handleClick={handleClick}
+            handleClick={() => handleClick(modal, setModal)}
             buttonSize="large"
           />
         </article>
