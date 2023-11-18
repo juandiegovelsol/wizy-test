@@ -3,13 +3,16 @@ import { useState, useEffect } from "react";
 import { CustomButton } from "../../components/CustomButton";
 import { TypeSelector } from "../../components/TypeSelector";
 import { Modal } from "../../components/Modal";
+import { Topic } from "../../components/Topic";
 
 import "./landing.scss";
 
 const Landing = () => {
   const [option, setOption] = useState("");
   const [modal, setModal] = useState(false);
-  const topic = "I want to add topic";
+  const [topic, setTopic] = useState("");
+  const [topicInfo, setTopicInfo] = useState("");
+  const topicText = "I want to add topic";
   const tag = "I want to add tags";
   const productInfo = "I want to add products info";
 
@@ -17,7 +20,6 @@ const Landing = () => {
     modal: boolean,
     setModal: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
-    console.log("setting state!!", modal);
     if (modal) {
       setModal(false);
     } else {
@@ -25,9 +27,21 @@ const Landing = () => {
     }
   };
 
+  const handleSubmitTopic = (topic: string, topicInfo: string) => {
+    const topicJSON = { topic, topicInfo };
+    console.log("Simulating http PUT", topicJSON);
+  };
+
   /*   useEffect(() => {
     console.log("option", option);
-  }, [option]); */
+  }, [option]); 
+  useEffect(() => {
+    console.log("Tupd", topic);
+  }, [topic]);
+
+  useEffect(() => {
+    console.log("TIupd", topicInfo);
+  }, [topicInfo]);*/
 
   return (
     <>
@@ -40,7 +54,7 @@ const Landing = () => {
             </p>
             <article className="landing__inputs">
               <TypeSelector
-                options={[topic, tag, productInfo]}
+                options={[topicText, tag, productInfo]}
                 setValue={setOption}
               />
               <CustomButton
@@ -52,9 +66,28 @@ const Landing = () => {
           </section>
         </main>
       )}
-      {modal && option === topic && (
+      {modal && option === topicText && (
         <Modal>
-          <p>This is a modal Topic</p>
+          <Topic
+            topic={topic}
+            setTopic={setTopic}
+            topicInfo={topicInfo}
+            setTopicInfo={setTopicInfo}
+          >
+            <CustomButton
+              text="Send"
+              handleClick={() => {
+                handleSubmitTopic(topic, topicInfo);
+                handleClick(modal, setModal);
+              }}
+              buttonSize="medium"
+            />
+            <CustomButton
+              text="Return"
+              handleClick={() => handleClick(modal, setModal)}
+              buttonSize="medium"
+            />
+          </Topic>
         </Modal>
       )}
       {modal && option === tag && (
