@@ -1,0 +1,30 @@
+@import "../../styles/variables.scss";
+
+.customButtonEvent {
+  text-align: center;
+  color: $backgroundColor;
+  background-color: $mainColor;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px 0px rgba(57, 58, 137, 1);
+  &__large {
+    height: 64px;
+    width: 224px;
+    font-size: $mediumfont;
+  }
+  &__medium {
+    height: 48px;
+    width: 169px;
+    font-size: $smallfont;
+  }
+  &__small {
+    height: 48px;
+    width: 107px;
+    font-size: $smallfont;
+  }
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    background-color: $thirdColor;
+  }
+}

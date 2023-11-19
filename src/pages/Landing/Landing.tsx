@@ -5,6 +5,7 @@ import { TypeSelector } from "../../components/TypeSelector";
 import { Modal } from "../../components/Modal";
 import { Topic } from "../../components/Topic";
 import { ProductInfo } from "../../components/ProductInfo";
+import { Tag } from "../../components/Tag";
 
 import "./landing.scss";
 
@@ -14,8 +15,10 @@ const Landing = () => {
   const [topic, setTopic] = useState("");
   const [topicInfo, setTopicInfo] = useState("");
   const [productInfo, setProductInfo] = useState("");
+  const [tag, setTag] = useState("");
+  const [tags, setTags] = useState([""]);
   const topicText = "I want to add topic";
-  const tag = "I want to add tags";
+  const tagText = "I want to add tags";
   const productInfoText = "I want to add products info";
 
   const handleClick = (
@@ -32,6 +35,8 @@ const Landing = () => {
   const handleSubmitTopic = (topic: string, topicInfo: string) => {
     const topicJSON = { topic, topicInfo };
     console.log("Simulating http PUT", topicJSON);
+    setTopic("");
+    setTopicInfo("");
   };
 
   /*   useEffect(() => {
@@ -44,6 +49,9 @@ const Landing = () => {
   useEffect(() => {
     console.log("TIupd", topicInfo);
   }, [topicInfo]);*/
+  useEffect(() => {
+    console.log("added tag", tags);
+  }, [tags]);
 
   return (
     <>
@@ -56,7 +64,7 @@ const Landing = () => {
             </p>
             <article className="landing__inputs">
               <TypeSelector
-                options={[topicText, tag, productInfoText]}
+                options={[topicText, tagText, productInfoText]}
                 setValue={setOption}
               />
               <CustomButton
@@ -92,9 +100,23 @@ const Landing = () => {
           </Topic>
         </Modal>
       )}
-      {modal && option === tag && (
+      {modal && option === tagText && (
         <Modal>
-          <p>This is a modal Tag</p>
+          <Tag tag={tag} setTag={setTag} tags={tags} setTags={setTags}>
+            <CustomButton
+              text="Send"
+              handleClick={() => {
+                console.log(tag);
+                handleClick(modal, setModal);
+              }}
+              buttonSize="medium"
+            />
+            <CustomButton
+              text="Return"
+              handleClick={() => handleClick(modal, setModal)}
+              buttonSize="medium"
+            />
+          </Tag>
         </Modal>
       )}
       {modal && option === productInfoText && (
