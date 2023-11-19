@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import "./topic.scss";
-import { CustomButton } from "../CustomButton";
 
 interface TypeTopicProps {
   topic?: string;

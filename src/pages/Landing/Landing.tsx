@@ -4,6 +4,7 @@ import { CustomButton } from "../../components/CustomButton";
 import { TypeSelector } from "../../components/TypeSelector";
 import { Modal } from "../../components/Modal";
 import { Topic } from "../../components/Topic";
+import { ProductInfo } from "../../components/ProductInfo";
 
 import "./landing.scss";
 
@@ -12,9 +13,10 @@ const Landing = () => {
   const [modal, setModal] = useState(false);
   const [topic, setTopic] = useState("");
   const [topicInfo, setTopicInfo] = useState("");
+  const [productInfo, setProductInfo] = useState("");
   const topicText = "I want to add topic";
   const tag = "I want to add tags";
-  const productInfo = "I want to add products info";
+  const productInfoText = "I want to add products info";
 
   const handleClick = (
     modal: boolean,
@@ -54,7 +56,7 @@ const Landing = () => {
             </p>
             <article className="landing__inputs">
               <TypeSelector
-                options={[topicText, tag, productInfo]}
+                options={[topicText, tag, productInfoText]}
                 setValue={setOption}
               />
               <CustomButton
@@ -95,9 +97,23 @@ const Landing = () => {
           <p>This is a modal Tag</p>
         </Modal>
       )}
-      {modal && option === productInfo && (
+      {modal && option === productInfoText && (
         <Modal>
-          <p>This is a modal Product</p>
+          <ProductInfo info={productInfo} setInfo={setProductInfo}>
+            <CustomButton
+              text="Send"
+              handleClick={() => {
+                console.log(productInfo);
+                handleClick(modal, setModal);
+              }}
+              buttonSize="small"
+            />
+            <CustomButton
+              text="Return"
+              handleClick={() => handleClick(modal, setModal)}
+              buttonSize="small"
+            />
+          </ProductInfo>
         </Modal>
       )}
     </>
