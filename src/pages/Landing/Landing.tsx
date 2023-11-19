@@ -6,8 +6,22 @@ import { Modal } from "../../components/Modal";
 import { Topic } from "../../components/Topic";
 import { ProductInfo } from "../../components/ProductInfo";
 import { Tag } from "../../components/Tag";
+import { data } from "../../assets/data";
 
 import "./landing.scss";
+
+export interface ProductListType {
+  discount: boolean;
+  displayTitle: string;
+  embeddingText: string;
+  id: string;
+  imageUrl: string;
+  price: string;
+  productType: string;
+  shopifyProductId: string;
+  url: string;
+  variants: string;
+}
 
 const Landing = () => {
   const [option, setOption] = useState("");
@@ -15,6 +29,8 @@ const Landing = () => {
   const [topic, setTopic] = useState("");
   const [topicInfo, setTopicInfo] = useState("");
   const [productInfo, setProductInfo] = useState("");
+  const [productList, setProductList] = useState<ProductListType[]>([]);
+  const [checked, setChecked] = useState([false]);
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([""]);
   const topicText = "I want to add topic";
@@ -39,6 +55,30 @@ const Landing = () => {
     setTopicInfo("");
   };
 
+  const getProducts = async (url: string) => {
+    console.log("entering getProducts method");
+    try {
+      console.log(url);
+      /* const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("obtained response", response);
+      if (response.status === 200) {
+        const { body } = response.json;
+        if (body !== null) {
+          setProductList(await body.json());
+        }
+      } */
+
+      setProductList(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   /*   useEffect(() => {
     console.log("option", option);
   }, [option]); 
@@ -48,10 +88,29 @@ const Landing = () => {
 
   useEffect(() => {
     console.log("TIupd", topicInfo);
-  }, [topicInfo]);*/
+  }, [topicInfo]);
   useEffect(() => {
     console.log("added tag", tags);
-  }, [tags]);
+  }, [tags]);*/
+
+  useEffect(() => {
+    console.log("checklist ", checked);
+  }, [checked]);
+
+  useEffect(() => {
+    if ((option === tagText || option === productInfoText) && modal) {
+      getProducts("https://api.wizybot.com/products/demo-product-list");
+      console.log("sending http get");
+    }
+  }, [option, modal]);
+
+  useEffect(() => {
+    console.log("productlist ", productList);
+    if (productList.length > 0) {
+      const array = Array(productList.length).fill(false);
+      setChecked(array);
+    }
+  }, [productList]);
 
   return (
     <>
@@ -102,7 +161,15 @@ const Landing = () => {
       )}
       {modal && option === tagText && (
         <Modal>
-          <Tag tag={tag} setTag={setTag} tags={tags} setTags={setTags}>
+          <Tag
+            tag={tag}
+            setTag={setTag}
+            tags={tags}
+            setTags={setTags}
+            productList={productList}
+            checked={checked}
+            setChecked={setChecked}
+          >
             <CustomButton
               text="Send"
               handleClick={() => {

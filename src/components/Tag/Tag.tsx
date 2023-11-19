@@ -1,12 +1,17 @@
 import React, { ReactNode } from "react";
-import "./tag.scss";
 import { CustomButtonEvent } from "../CustomButtonEvent";
+import { ProductList } from "../ProductList";
+import { ProductListType } from "../../pages/Landing/Landing";
+import "./tag.scss";
 
 interface TagProps {
   tag?: string;
   setTag: React.Dispatch<React.SetStateAction<string>>;
   tags?: string[];
   setTags: React.Dispatch<React.SetStateAction<string[]>>;
+  productList: ProductListType[];
+  checked: boolean[];
+  setChecked: React.Dispatch<React.SetStateAction<boolean[]>>;
   children?: ReactNode;
 }
 
@@ -15,11 +20,20 @@ const Tag: React.FC<TagProps> = ({
   setTag,
   tags = [""],
   setTags,
+  productList = [],
+  checked = [],
+  setChecked,
   children,
 }) => {
   return (
     <div className="tag">
-      <div className="tag__left"></div>
+      <div className="tag__left">
+        <ProductList
+          productList={productList}
+          checked={checked}
+          setChecked={setChecked}
+        />
+      </div>
       <div className="tag__line"></div>
       <div className="tag__rigth">
         <form className="tag__form">

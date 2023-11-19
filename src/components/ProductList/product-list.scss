@@ -1,0 +1,68 @@
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
+
+.product-list {
+  height: 100%;
+  width: 100%;
+  @include flexbox(flex, column, flex-start, flex-start);
+
+  &__label {
+    font-size: $mediumfont;
+    margin-bottom: 16px;
+  }
+  &__card-container {
+    width: 100%;
+    height: 70%;
+    overflow-y: scroll;
+    /*overflow-x: visible; */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__card {
+    width: 100%;
+    max-width: 100%;
+    min-height: 80px;
+    padding: 0px 16px;
+    @include flexbox(flex, row, space-between, center);
+    border-top: 1px solid $mainColor;
+    border-bottom: 1px solid $mainColor;
+    margin-top: 16px;
+    color: $mainColor;
+    &:hover,
+    &:focus {
+      cursor: pointer;
+      border-top: 1px solid $thirdColor;
+      border-bottom: 1px solid $thirdColor;
+      color: $thirdColor;
+      transform: scale(1.05);
+    }
+  }
+  &__card-image {
+    height: 48px;
+    width: 48px;
+    object-fit: cover;
+    align-self: center;
+    justify-self: center;
+    margin-right: 16px;
+  }
+  &__card-title {
+    width: auto;
+    width: 100%;
+    font-size: $smallfont;
+    text-align: left;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__card-checkbox {
+    min-height: 32px;
+    min-width: 32px;
+    border: 1px solid $mainColor;
+    border-radius: 8px;
+    margin-left: 16px;
+    @include flexbox(flex, row, center, center);
+  }
+}
