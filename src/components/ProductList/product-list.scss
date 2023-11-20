@@ -8,12 +8,13 @@
 
   &__label {
     font-size: $mediumfont;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
   }
   &__card-container {
     width: 100%;
     height: 70%;
     overflow-y: scroll;
+    margin-bottom: 29px;
     /*overflow-x: visible; */
     &::-webkit-scrollbar {
       display: none;
@@ -64,5 +65,11 @@
     border-radius: 8px;
     margin-left: 16px;
     @include flexbox(flex, row, center, center);
+  }
+  &__continue-icon {
+    width: 100%;
+    @include flexbox(flex, row, center, center);
+  }
+  &__continue-image {
   }
 }

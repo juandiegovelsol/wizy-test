@@ -47,7 +47,7 @@
     box-shadow: 0px 4px 20px 0px rgba(57, 58, 137, 1);
   }
   &__buttons {
-    width: 50%;
+    width: 80%;
     @include flexbox(flex, row, space-between, flex-start);
   }
 }

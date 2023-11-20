@@ -61,7 +61,7 @@ const Tag: React.FC<TagProps> = ({
           </div>
           <label className="tag__text">Tags to send</label>
           <ul className="tag__list">
-            {tags.length > 1 &&
+            {tags.length > 0 &&
               tags.map((tag, index) => {
                 return tag !== "" ? (
                   <li className="tag__list-element" key={index}>

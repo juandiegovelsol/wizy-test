@@ -1,6 +1,7 @@
 import React from "react";
 import { ProductListType } from "../../pages/Landing/Landing";
 import checkicon from "../../assets/checkicon.svg";
+import continueicon from "../../assets/continue.svg";
 import "./product-list.scss";
 
 interface ProductListProps {
@@ -47,6 +48,9 @@ const ProductList: React.FC<ProductListProps> = ({
               </div>
             );
           })}
+      </div>
+      <div className="product-list__continue-icon">
+        <img src={continueicon} className="product-list__continue-image" />
       </div>
     </div>
   );
