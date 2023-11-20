@@ -67,6 +67,7 @@ const Landing = () => {
 
   // Function to fetch product data from an API (simulated using sample data)
   const getProducts = async (url: string) => {
+    console.log(url);
     try {
       /* const response = await fetch(url, {
         method: "GET",
