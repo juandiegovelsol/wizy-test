@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-//import { Dispatch, SetStateAction } from "react";
 import { CustomButton } from "../../components/CustomButton";
 import { CustomButtonEvent } from "../../components/CustomButtonEvent";
 import { TypeSelector } from "../../components/TypeSelector";
@@ -7,11 +6,12 @@ import { Modal } from "../../components/Modal";
 import { Topic } from "../../components/Topic";
 import { ProductInfo } from "../../components/ProductInfo";
 import { Tag } from "../../components/Tag";
-import { data } from "../../assets/data";
+import { ProductList } from "../../components/ProductList";
+import { data } from "../../assets/data"; // Sample data import
 
 import "./landing.scss";
-import { ProductList } from "../../components/ProductList";
 
+// Define interface for product list items
 export interface ProductListType {
   discount: boolean;
   displayTitle: string;
@@ -25,20 +25,25 @@ export interface ProductListType {
   variants: string;
 }
 
+// Landing page Component
 const Landing = () => {
-  const [option, setOption] = useState("");
-  const [modal, setModal] = useState(false);
-  const [topic, setTopic] = useState("");
-  const [topicInfo, setTopicInfo] = useState("");
-  const [productInfo, setProductInfo] = useState("");
-  const [productList, setProductList] = useState<ProductListType[]>([]);
-  const [checked, setChecked] = useState<boolean[]>([]);
-  const [tag, setTag] = useState("");
-  const [tags, setTags] = useState<string[]>([]);
+  // Define and initialize state variables using useState hook
+  const [option, setOption] = useState(""); // Selected option state
+  const [modal, setModal] = useState(false); // Modal window state
+  const [topic, setTopic] = useState(""); // Topic state
+  const [topicInfo, setTopicInfo] = useState(""); // Topic info state
+  const [productInfo, setProductInfo] = useState(""); // Product info state
+  const [productList, setProductList] = useState<ProductListType[]>([]); // Product list state
+  const [checked, setChecked] = useState<boolean[]>([]); // Checked items state
+  const [tag, setTag] = useState(""); // Tag state
+  const [tags, setTags] = useState<string[]>([]); // Tags list state
+
+  // Constants for options values
   const topicText = "I want to add topic";
   const tagText = "I want to add tags";
   const productInfoText = "I want to add products info";
 
+  // Function to toggle modal
   const handleClick = (
     modal: boolean,
     setModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -50,6 +55,7 @@ const Landing = () => {
     }
   };
 
+  // Function to handle topic submission
   const handleSubmitTopic = (topic: string, topicInfo: string) => {
     const topicJSON = { topic, topicInfo };
     alert(
@@ -59,6 +65,7 @@ const Landing = () => {
     setTopicInfo("");
   };
 
+  // Function to fetch product data from an API (simulated using sample data)
   const getProducts = async (url: string) => {
     try {
       /* const response = await fetch(url, {
@@ -74,19 +81,21 @@ const Landing = () => {
           setProductList(await body.json());
         }
       } */
-
+      // Simulated fetch request - using sample data directly
       setProductList(data);
     } catch (error) {
       console.log(error);
     }
   };
 
+  // useEffect to fetch products when option and modal change
   useEffect(() => {
     if ((option === tagText || option === productInfoText) && modal) {
       getProducts("https://api.wizybot.com/products/demo-product-list");
     }
   }, [option, modal]);
 
+  // useEffect to update checked array based on product list changes
   useEffect(() => {
     if (productList.length > 0) {
       const array = Array(productList.length).fill(false);
@@ -96,6 +105,7 @@ const Landing = () => {
 
   return (
     <>
+      {/* Render this section when the modal is not open */}
       {!modal && (
         <main className="landing">
           <section className="landing__container">
@@ -104,10 +114,12 @@ const Landing = () => {
               Select which type of information do you want to add to our system
             </p>
             <article className="landing__inputs">
+              {/* TypeSelector component to select options */}
               <TypeSelector
                 options={[topicText, tagText, productInfoText]}
                 setValue={setOption}
               />
+              {/* CustomButton to open modal based on selected option */}
               <CustomButton
                 text="Continue"
                 handleClick={() => handleClick(modal, setModal)}
@@ -117,6 +129,8 @@ const Landing = () => {
           </section>
         </main>
       )}
+
+      {/* Render this section when the modal is open and option matches to Topic*/}
       {modal && option === topicText && (
         <Modal>
           <Topic
@@ -144,6 +158,8 @@ const Landing = () => {
           </Topic>
         </Modal>
       )}
+
+      {/* Render this section when the modal is open and option matches to Tag*/}
       {modal && option === tagText && (
         <Modal>
           <Tag
@@ -157,6 +173,7 @@ const Landing = () => {
           >
             <CustomButtonEvent
               text="Send"
+              // Function to handle tags submission
               handleClick={(e) => {
                 e.preventDefault();
                 const selectedProducts: string[] = [];
@@ -174,7 +191,6 @@ const Landing = () => {
                       tagsJSON
                     )}`
                   );
-                  //console.log("simulating Tags http put", tagsJSON);
                   setChecked([]);
                   setProductList([]);
                   setTags([]);
@@ -192,6 +208,7 @@ const Landing = () => {
           </Tag>
         </Modal>
       )}
+      {/* Render this section when the modal is open and option matches to Product info*/}
       {modal && option === productInfoText && (
         <Modal>
           <ProductInfo
@@ -203,6 +220,7 @@ const Landing = () => {
           >
             <CustomButtonEvent
               text="Send"
+              // Function to handle product info submission
               handleClick={(e) => {
                 e.preventDefault();
                 const selectedProducts: string[] = [];
@@ -220,7 +238,6 @@ const Landing = () => {
                       productJSON
                     )}`
                   );
-                  //console.log("simulating Product info http put", productJSON);
                   setChecked([]);
                   setProductList([]);
                   setProductInfo("");

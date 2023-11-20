@@ -4,17 +4,19 @@ import { ProductList } from "../ProductList";
 import { ProductListType } from "../../pages/Landing/Landing";
 import "./tag.scss";
 
+// Define props required for the Tag component
 interface TagProps {
   tag?: string;
-  setTag: React.Dispatch<React.SetStateAction<string>>;
+  setTag: React.Dispatch<React.SetStateAction<string>>; // Function to set tag value
   tags?: string[];
-  setTags: React.Dispatch<React.SetStateAction<string[]>>;
-  productList: ProductListType[];
+  setTags: React.Dispatch<React.SetStateAction<string[]>>; // Function to set tags array
+  productList: ProductListType[]; // Array of product list items
   checked: boolean[];
-  setChecked: React.Dispatch<React.SetStateAction<boolean[]>>;
+  setChecked: React.Dispatch<React.SetStateAction<boolean[]>>; // Function to update checked state
   children?: ReactNode;
 }
 
+// Tag Component: Represents a section for adding tags to products
 const Tag: React.FC<TagProps> = ({
   tag = "",
   setTag,
@@ -27,6 +29,7 @@ const Tag: React.FC<TagProps> = ({
 }) => {
   return (
     <div className="tag">
+      {/* Left section for displaying list of products */}
       <div className="tag__left">
         <ProductList
           productList={productList}
@@ -34,11 +37,16 @@ const Tag: React.FC<TagProps> = ({
           setChecked={setChecked}
         />
       </div>
+
+      {/* Separator line */}
       <div className="tag__line"></div>
+
+      {/* Rigth section for entering a tag*/}
       <div className="tag__rigth">
         <form className="tag__form">
           <label className="tag__text">Add Products Tag</label>
           <div className="tag__input-container">
+            {/* Input field for entering a tag */}
             <input
               type="text"
               className="tag__input"
@@ -48,6 +56,7 @@ const Tag: React.FC<TagProps> = ({
                 setTag(e.target.value);
               }}
             />
+            {/* Button to add the entered tag to the tags array */}
             <CustomButtonEvent
               text="Add"
               handleClick={(e) => {
@@ -59,6 +68,8 @@ const Tag: React.FC<TagProps> = ({
               buttonSize="small"
             />
           </div>
+
+          {/* Display the list of tags */}
           <label className="tag__text">Tags to send</label>
           <ul className="tag__list">
             {tags.length > 0 &&
@@ -72,7 +83,8 @@ const Tag: React.FC<TagProps> = ({
                 );
               })}
           </ul>
-          <div></div>
+
+          {/* Container for additional buttons or elements */}
           <div className="tag__buttons">{children}</div>
         </form>
       </div>

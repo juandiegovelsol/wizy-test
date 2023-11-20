@@ -1,5 +1,5 @@
 import "./custom-button.scss";
-
+//Customized button in 3 different sizes
 const CustomButton = ({
   text = "Continue",
   handleClick = () => {},

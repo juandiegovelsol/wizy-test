@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import "./modal.scss";
 
+//Modal window, it is just the outer container
 const Modal = ({ children }: { children: ReactNode }) => {
   return (
     <div className="modal">
