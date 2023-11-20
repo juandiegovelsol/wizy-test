@@ -67,23 +67,19 @@ const Landing = () => {
 
   // Function to fetch product data from an API (simulated using sample data)
   const getProducts = async (url: string) => {
-    console.log(url);
     try {
-      /* const response = await fetch(url, {
+      const response = await fetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log("obtained response", response);
       if (response.status === 200) {
-        const { body } = response.json;
-        if (body !== null) {
-          setProductList(await body.json());
-        }
-      } */
+        const productListData = await response.json();
+        setProductList(productListData);
+      }
       // Simulated fetch request - using sample data directly
-      setProductList(data);
+      //setProductList(data);
     } catch (error) {
       console.log(error);
     }
