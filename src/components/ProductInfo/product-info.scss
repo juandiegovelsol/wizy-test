@@ -1,0 +1,53 @@
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
+
+.product {
+  height: 85%;
+  width: 100%;
+  @include flexbox(flex, row, center, center);
+
+  &__left {
+    height: 100%;
+    width: 50%;
+    padding: 64px 64px 48px 64px;
+    @include flexbox(flex, column, flex-start, flex-start);
+  }
+  &__line {
+    height: 100%;
+    width: 1px;
+    background-color: $secondColor;
+    opacity: 0.5;
+  }
+  &__rigth {
+    height: 100%;
+    width: 50%;
+    padding: 64px 64px 48px 64px;
+    @include flexbox(flex, column, flex-start, flex-start);
+  }
+  &__form {
+    height: 100%;
+    width: 100%;
+    @include flexbox(flex, column, flex-start, flex-start);
+  }
+  &__text {
+    width: 100%;
+    font-size: $mediumfont;
+    margin-bottom: 32px;
+  }
+  &__input {
+    height: 48px;
+    width: 100%;
+    font-size: $smallfont;
+    margin-bottom: 32px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-indent: 16px;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0px 4px 20px 0px rgba(57, 58, 137, 1);
+  }
+  &__buttons {
+    width: 80%;
+    @include flexbox(flex, row, space-between, flex-start);
+  }
+}
