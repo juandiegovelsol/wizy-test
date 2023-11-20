@@ -1,0 +1,25 @@
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
+
+.type-selector {
+  height: 64px;
+  max-width: 672px;
+  width: 80%;
+  margin-right: 64px;
+  @include flexbox(flex, row, center, center);
+  &__selector {
+    height: 100%;
+    width: 100%;
+    text-align: left;
+    text-indent: 20px;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0px 4px 20px 0px rgba(57, 58, 137, 1);
+    font-size: $mediumfont;
+    background-image: none;
+  }
+  &__option {
+    //CONTINUE STYLING HERE
+    padding-left: 50px;
+  }
+}
