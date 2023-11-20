@@ -7,7 +7,7 @@ import { Topic } from "../../components/Topic";
 import { ProductInfo } from "../../components/ProductInfo";
 import { Tag } from "../../components/Tag";
 import { ProductList } from "../../components/ProductList";
-import { data } from "../../assets/data"; // Sample data import
+//import { data } from "../../assets/data"; // Sample data import
 
 import "./landing.scss";
 
